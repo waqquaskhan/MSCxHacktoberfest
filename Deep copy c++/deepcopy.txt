@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+class deep
+{
+    private:
+    int *data;
+    public:
+    void setData(int d) {*data=d;}
+    int getdata(){return *data;}
+    deep (int d);//constructor
+    deep (const deep &source);// copy constructor
+    ~deep();// destructor
+};
+deep::deep(int d)
+{
+    data = new int; // allocates storage
+    *data=d;
+}
+ deep::deep(const deep &source)
+    :data{source.data}
+    {
+        cout<<"Copy constructor - deep copy\n";
+    }
+deep::~deep()
+{
+    delete data;
+    cout<<"Destructor freeing data\n";
+   
+}
+void diplay(deep d)
+{ 
+    cout<<d.getdata()<<endl;
+
+}
+int main()
+{
+    deep obj1 {100};
+    diplay(obj1);
+    
+    deep obj2 {obj1};
+    obj2.setData(1000);
+    return 0;
+}
